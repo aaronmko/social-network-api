@@ -56,3 +56,22 @@ module.exports = {
                 return res.status(500).json(err);
             });
     },
+
+    deleteUser (req, res) {
+        User.findOneAndDelete({ _id: req.params.userId })
+            .then((user) => {
+                if (!user) {
+                    res.status(404).json({ message: 'No user with this id found' })
+                }
+                // Remove a user's associated thoughts when deleted
+                Thought.deleteMany({ _id: { $in: user.thoughts } })
+                return res.json({
+                    deletedUser: user,
+                    message: 'User and associated thoughts deleted'
+                });
+            })
+            .catch((err) => {
+                console.log(err);
+                return res.status(500).json(err);
+            });
+    },

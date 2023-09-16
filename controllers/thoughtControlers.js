@@ -26,3 +26,26 @@ module.exports = {
                 return res.status(500).json(err);
             });
     },
+
+    createThought (req, res) {
+        Thought.create(req.body)
+            .then((thought) => {
+                return User.findOneAndUpdate(
+                    { _id: req.body.userId },
+                    { $push: { thoughts: thought._id } },
+                    { new: true }
+                );
+            })
+            .then((user) =>
+                !user
+                    ? res.status(404).json({ message: "Thought created but no user with this id found" })
+                    : res.json({
+                        updatedUser: user,
+                        message: 'Thought added to user'
+                    })
+            )
+            .catch((err) => {
+                console.log(err);
+                return res.status(500).json(err);
+            });
+    },

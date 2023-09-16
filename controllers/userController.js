@@ -26,3 +26,13 @@ module.exports = {
                 return res.status(500).json(err);
             });
     },
+
+    createUser (req, res) {
+        User.create(req.body)
+            .then((user) => {
+                return res.json(user)
+            })
+            .catch((err) => {
+                return res.status(500).json(err)
+            });
+    },

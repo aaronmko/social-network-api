@@ -1,21 +1,18 @@
 {
-    "name": "develop",
+    "name": "social-network-api",
     "version": "1.0.0",
     "description": "",
-    "main": "index.js",
+    "main": "server.js",
     "scripts": {
-      "start": "node index",
-      "dev": "nodemon index"
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "start": "node server.js"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "dependencies": {
-      "dayjs": "^1.11.7",
-      "express": "^4.18.2",
-      "mongoose": "^6.9.2"
-    },
-    "devDependencies": {
-      "nodemon": "^2.0.22"
+      "express": "^4.17.1",
+      "moment": "^2.29.1",
+      "mongoose": "^5.12.1"
     }
   }
